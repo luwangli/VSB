@@ -9,7 +9,7 @@ Bitmap (VSB). VSB automatically adapts its sampling probabaility to different st
 by logically adding virtual bits.
 
 we compare VSB to existing cardinality estimators including LogLog, HyperLogLog,
-HyperLogLog++, HyperLogLog-Tailcut, MRB, and SMB.
+HyperLogLog++, HyperLogLog-Tailcut, FM, MRB, and SMB.
 
 
 ## File
