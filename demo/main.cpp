@@ -217,7 +217,7 @@ int main(){
     clock_gettime(CLOCK_MONOTONIC,&end_time);
         timediff = (long long)(end_time.tv_sec - start_time.tv_sec) * 1000000000LL + (end_time.tv_nsec - start_time.tv_nsec);
     insert_throughput = (double)1000.0*pkt_num / timediff;
-    cout<<"no insert pro"<<endl;
+
     clock_gettime(CLOCK_MONOTONIC,&start_time);
     for(int i=0;i<query_num;i++){
         est_car = PCSAEstGetCar(pcsa);

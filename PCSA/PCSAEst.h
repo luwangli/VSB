@@ -14,7 +14,7 @@ PCSAEst *newPCSAEst(int m, int size){
     PCSAEst *pcsa = (PCSAEst*)malloc(sizeof(PCSAEst));
     pcsa->Size = size;
     pcsa->Num = m;
-    cout<<" PCSA num: "<<pcsa->Num <<endl;
+ //   cout<<" PCSA num: "<<pcsa->Num <<endl;
   //  pcsa->B = (BitMap*)malloc(sizeof(BitMap) * pcsa->Num);
 
     for(int i=0;i<pcsa->Num;i++){

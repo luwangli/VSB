@@ -33,6 +33,18 @@ public:
         return z;
     }
 
+    int countConsecOne(int size){
+        int re = 0;
+        for(int i=1;i<size;i++){
+        //    cout<<"i:? "<<get(i)<<endl;
+            if(!!get(i)){
+                re +=1;
+            }else{
+                break;
+            }
+        }
+        return re;
+    }
 
 };
 
