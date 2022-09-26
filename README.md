@@ -19,6 +19,7 @@ HyperLogLog++, HyperLogLog-Tailcut, MRB, and SMB.
 - MRB/. the implementation of MRB estimator
 - SMB/. the implementation of SMB estimator
 - VSA/. the implementation of VSB estimator
+- PCSA/. the implementation of PCSA (also called FM) estimator
 
 Note that we don't released HyperLogLog-Tailcut code due to the copyright. You can download it from (https://www.dropbox.com/s/l0eaexhzvi34x9u/HLLPlus.zip),
 or send email to the author of original paper (Better with fewer bits: Improving the performance of cardinality estimation of large data streams)

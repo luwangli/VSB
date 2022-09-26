@@ -6,6 +6,7 @@
 #include "../HLL/HLLEstBitV.h"
 #include "../LL/LLEstBitV.h"
 #include "../SRB/srb.h"
+#include "../PCSA/PCSAEst.h"
 #include "../common/param.h"
 #include "../hllp_card/hyperloglogplus_counting.h"
 using namespace std;
@@ -202,6 +203,35 @@ int main(){
         <<"\t query: "<<query_throughput<<endl;
     outFile.open("result.csv",ios::app);
     outFile<<filename<<","<<length<<",VSB,"<<abs(est_car-pkt_num)*1.0/pkt_num<<","<<insert_throughput<<","<<query_throughput<<endl;
+    outFile.close();
+
+      /**************PCSA, which also called FM*************************/
+    cout<<endl<<"\nPCSA"<<endl;
+    int pcsa_size = 32;
+    auto pcsa = newPCSAEst(length/pcsa_size,pcsa_size);
+     clock_gettime(CLOCK_MONOTONIC,&start_time);
+    for(int i=0;i<pkt_num;i++){
+    //    cout<<"num: "<<i<<endl;
+        PCSAEstInsert(pcsa, Stream[i].second);
+    }
+    clock_gettime(CLOCK_MONOTONIC,&end_time);
+        timediff = (long long)(end_time.tv_sec - start_time.tv_sec) * 1000000000LL + (end_time.tv_nsec - start_time.tv_nsec);
+    insert_throughput = (double)1000.0*pkt_num / timediff;
+    cout<<"no insert pro"<<endl;
+    clock_gettime(CLOCK_MONOTONIC,&start_time);
+    for(int i=0;i<query_num;i++){
+        est_car = PCSAEstGetCar(pcsa);
+    }
+    clock_gettime(CLOCK_MONOTONIC,&end_time);
+    timediff = (long long)(end_time.tv_sec - start_time.tv_sec) * 1000000000LL + (end_time.tv_nsec - start_time.tv_nsec);
+    query_throughput = (double)1000.0*query_num /timediff;
+
+  //  est_car = PCSAEstGetCar(pcsa);
+    cout<<"estimate value: "<< est_car<<"\t error: "<<abs(est_car-flow_num)
+    <<"\t insert: "<<insert_throughput
+    <<"\t query: "<<query_throughput<<endl;
+        outFile.open("result.csv",ios::app);
+    outFile<<filename<<","<<length<<",pcsa,"<<abs(est_car-pkt_num)*1.0/pkt_num<<","<<insert_throughput<<","<<query_throughput<<endl;
     outFile.close();
 
 
